@@ -3,14 +3,13 @@
 import requests
 
 
-def getIp():
+def get_ip():
     url = "https://api.ipify.org"
     data = {}
-    response = None
 
     try:
         response = requests.get(url, timeout=5)
-    except requests.exceptions.RequestException:
+    except requests.exceptions.RequestException as e:
         data['status'] = "ERROR"
     else:
         data['status'] = "OK"
@@ -20,5 +19,5 @@ def getIp():
 
 
 if __name__ == '__main__':
-    output = getIp()
+    output = get_ip()
     print(output)
