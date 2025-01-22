@@ -5,12 +5,8 @@ import sys
 
 
 def error(msg):
-    print(f"[ERROR] {msg}")
+    print({'status': 'error', 'message': msg})
     sys.exit(1)
-
-
-def info(msg):
-    print(f"[INFO] {msg}")
 
 
 class Cloudflare:
