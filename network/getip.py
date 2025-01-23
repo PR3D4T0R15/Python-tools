@@ -8,7 +8,7 @@ def get_ip():
 
     try:
         response = requests.get(url, timeout=5)
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         data['status'] = "ERROR"
     else:
         data['status'] = "OK"
