@@ -12,6 +12,7 @@ def error(msg):
 class Cloudflare:
     url = ''
     headers = {}
+    body = {}
 
     def __init__(self):
         self.url = "https://api.cloudflare.com"
@@ -30,9 +31,16 @@ class Cloudflare:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--authtoken', type=str, help="set auth token")
-    parser.add_argument('--authkey', type=str, help="set auth key")
-    parser.add_argument('--authemail', type=str, help="set auth email")
+    parser.add_argument('--auth-token', type=str, help="set auth token")
+    parser.add_argument('--auth-key', type=str, help="set auth key")
+    parser.add_argument('--auth-email', type=str, help="set auth email")
     args = parser.parse_args()
 
     cloudflare = Cloudflare()
+
+    if args.auth_token:
+        cloudflare.set_authtoken(args.auth_token)
+    elif args.auth_key and args.auth_email:
+        cloudflare.set_authkey(args.auth_key, args.auth_email)
+    else:
+        error('Auth method not specified. Token or key and email must be set.')
